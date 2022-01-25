@@ -2,9 +2,9 @@
 
 namespace Astrogoat\Gtm\Tests;
 
+use Astrogoat\Gtm\GtmServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Astrogoat\Gtm\GtmServiceProvider;
 
 class TestCase extends Orchestra
 {

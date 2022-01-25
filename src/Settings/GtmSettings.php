@@ -2,8 +2,8 @@
 
 namespace Astrogoat\Gtm\Settings;
 
-use Helix\Lego\Settings\AppSettings;
 use Astrogoat\Gtm\Actions\GtmAction;
+use Helix\Lego\Settings\AppSettings;
 
 class GtmSettings extends AppSettings
 {

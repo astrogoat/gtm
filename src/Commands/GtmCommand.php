@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Astrogoat\Gtm\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class GtmCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'gtm';
 
     public $description = 'My command';
 

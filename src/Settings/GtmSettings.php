@@ -2,30 +2,28 @@
 
 namespace Astrogoat\Gtm\Settings;
 
-use Astrogoat\Gtm\Actions\GtmAction;
 use Helix\Lego\Settings\AppSettings;
 
 class GtmSettings extends AppSettings
 {
-    // public string $url;
-    // public string $access_token;
+    public string $container_id;
 
     protected array $rules = [
-        // 'url' => ['required', 'url'],
-        // 'access_token' => ['required'],
+        'container_id' => ['required_unless:enabled,false'],
     ];
-
-    protected static array $actions = [
-        // GtmAction::class,
-    ];
-
-    // public static function encrypted(): array
-    // {
-    //     return ['access_token'];
-    // }
 
     public function description(): string
     {
-        return 'Interact with Gtm.';
+        return 'Interact with Google Tag Manager.';
+    }
+
+    public function sections(): array
+    {
+        return [
+            [
+                'title' => 'Keys',
+                'properties' => ['container_id'],
+            ],
+        ];
     }
 }

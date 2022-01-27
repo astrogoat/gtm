@@ -23,7 +23,7 @@ class GtmSettings extends AppSettings
             [
                 'title' => 'Keys',
                 'properties' => ['container_id'],
-            ]
+            ],
         ];
     }
 }

@@ -41,7 +41,7 @@ class DataLayer
     /**
      * Return an array representation of the data layer.
      */
-    public function toArray() : array
+    public function toArray(): array
     {
         return $this->data;
     }
@@ -49,7 +49,7 @@ class DataLayer
     /**
      * Return a json representation of the data layer.
      */
-    public function toJson() : string
+    public function toJson(): string
     {
         return json_encode($this->data, JSON_UNESCAPED_UNICODE);
     }

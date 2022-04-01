@@ -35,7 +35,7 @@ class GtmServiceProvider extends PackageServiceProvider
             $lego->registerApp(fn (App $app) => $this->registerApp($app));
         });
 
-        $this->app->singleton(GoogleTagManager::class, function() {
+        $this->app->singleton(GoogleTagManager::class, function () {
             return new GoogleTagManager(settings(GtmSettings::class, 'container_id'));
         });
 

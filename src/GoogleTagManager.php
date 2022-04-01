@@ -67,7 +67,7 @@ class GoogleTagManager
     /**
      * Retrieve the data layer.
      */
-    public function getDataLayer() : DataLayer
+    public function getDataLayer(): DataLayer
     {
         return $this->dataLayer;
     }
@@ -83,7 +83,7 @@ class GoogleTagManager
     /**
      * Retrieve the data layer's data for the next request.
      */
-    public function getFlashData() : array
+    public function getFlashData(): array
     {
         return $this->flashDataLayer->toArray();
     }
@@ -101,7 +101,7 @@ class GoogleTagManager
     /**
      * Retrieve the data layer's data for the next request.
      */
-    public function getPushData() : Collection
+    public function getPushData(): Collection
     {
         return $this->pushDataLayer;
     }
@@ -118,7 +118,7 @@ class GoogleTagManager
     /**
      * Utility function to dump an array as json.
      */
-    public function dump(array $data) : string
+    public function dump(array $data): string
     {
         return (new DataLayer($data))->toJson();
     }

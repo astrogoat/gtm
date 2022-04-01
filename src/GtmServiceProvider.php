@@ -18,9 +18,15 @@ class GtmServiceProvider extends PackageServiceProvider
             ->migrations([
                 __DIR__ . '/../database/migrations',
                 __DIR__ . '/../database/migrations/settings',
-            ])
-            ->backendRoutes(__DIR__.'/../routes/backend.php')
-            ->frontendRoutes(__DIR__.'/../routes/frontend.php');
+            ]);
+    }
+
+    public function bootingPackage()
+    {
+        $this->app['view']->creator(
+            ['gtm::header-script', 'gtm::body-script'],
+            ScriptViewCreator::class
+        );
     }
 
     public function registeringPackage()
@@ -28,10 +34,16 @@ class GtmServiceProvider extends PackageServiceProvider
         $this->callAfterResolving('lego', function (LegoManager $lego) {
             $lego->registerApp(fn (App $app) => $this->registerApp($app));
         });
+
+        $this->app->singleton(GoogleTagManager::class, function() {
+            return new GoogleTagManager(settings(GtmSettings::class, 'container_id'));
+        });
+
+        $this->app->alias(GoogleTagManager::class, 'googletagmanager');
     }
 
     public function configurePackage(Package $package): void
     {
-        $package->name('gtm')->hasViews();
+        $package->name('gtm')->hasViews()->hasConfigFile();
     }
 }

@@ -1,6 +1,6 @@
 {
     "name": "astrogoat/gtm",
-    "description": "A Gtm app for Strata",
+    "description": "A Google Tag Manager app for Strata",
     "keywords": [
         "astrogoat",
         "laravel",
@@ -59,7 +59,7 @@
                 "Astrogoat\\Gtm\\GtmServiceProvider"
             ],
             "aliases": {
-                "Gtm": "Astrogoat\\Gtm\\GtmFacade"
+                "GoogleTagManager": "Astrogoat\\Gtm\\Facades"
             }
         }
     },

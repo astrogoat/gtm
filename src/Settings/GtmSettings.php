@@ -14,7 +14,7 @@ class GtmSettings extends AppSettings
 
     public function description(): string
     {
-        return 'Interact with Google Tag Manager.';
+        return 'Interact with Google Tag Manager (GTM).';
     }
 
     public function sections(): array

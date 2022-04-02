@@ -9,7 +9,7 @@ class GtmSettings extends AppSettings
 {
     public string $container_id;
 
-    public function getRules() : array
+    public function getRules(): array
     {
         return [
             'container_id' => Rule::requiredIf($this->enabled),

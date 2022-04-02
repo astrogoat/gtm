@@ -3,14 +3,18 @@
 namespace Astrogoat\Gtm\Settings;
 
 use Helix\Lego\Settings\AppSettings;
+use Illuminate\Validation\Rule;
 
 class GtmSettings extends AppSettings
 {
     public string $container_id;
 
-    protected array $rules = [
-        'container_id' => ['required_unless:enabled,false'],
-    ];
+    public function getRules() : array
+    {
+        return [
+            'container_id' => Rule::requiredIf($this->enabled),
+        ];
+    }
 
     public function description(): string
     {

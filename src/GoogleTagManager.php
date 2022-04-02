@@ -10,7 +10,7 @@ class GoogleTagManager
 {
     use Macroable;
 
-    protected string $id;
+    protected ?string $id;
 
     protected bool $enabled;
 
@@ -20,13 +20,13 @@ class GoogleTagManager
 
     protected Collection $pushDataLayer;
 
-    public function __construct(string $id)
+    public function __construct(string $id = null)
     {
         $this->id = $id;
         $this->dataLayer = new DataLayer();
         $this->flashDataLayer = new DataLayer();
         $this->pushDataLayer = new Collection();
-        $this->enabled = GtmSettings::isEnabled();
+        $this->enabled = GtmSettings::isEnabled() && ! blank($this->id);
     }
 
     /**

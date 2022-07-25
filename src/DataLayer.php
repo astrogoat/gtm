@@ -15,7 +15,7 @@ class DataLayer
 
     /**
      * Add data to the data layer. Supports dot notation.
-     * Inspired by laravel's config repository class.
+     * Inspired by Laravel's config repository class.
      */
     public function set(array|string $key, mixed $value = null)
     {

@@ -32,7 +32,7 @@ class GoogleTagManagerMiddleware
     public function handle($request, Closure $next)
     {
         if ($this->session->has($this->sessionKey)) {
-            $this->googleTagManager->set($this->session->get($this->sessionKey));
+            $this->googleTagManager->push($this->session->get($this->sessionKey));
         }
 
         $response = $next($request);

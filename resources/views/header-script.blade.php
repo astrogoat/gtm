@@ -1,4 +1,5 @@
 @if(\Astrogoat\Gtm\Settings\GtmSettings::isEnabled())
+    <!-- [GTM] Header | Start -->
     <script>
         window.dataLayer = window.dataLayer || [];
 
@@ -18,4 +19,5 @@
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'container_id') }}');
     </script>
+    <!-- [GTM] Header | End -->
 @endif

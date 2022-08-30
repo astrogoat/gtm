@@ -4,9 +4,9 @@ namespace Astrogoat\Gtm;
 
 use Astrogoat\Gtm\Settings\GtmSettings;
 use Helix\Lego\Apps\App;
+use Helix\Lego\Apps\Services\IncludeFrontendViews;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
-use Helix\Lego\Apps\Services\IncludeFrontendViews;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class GtmServiceProvider extends PackageServiceProvider

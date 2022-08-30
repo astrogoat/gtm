@@ -6,6 +6,7 @@ use Astrogoat\Gtm\Settings\GtmSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\LegoManager;
 use Spatie\LaravelPackageTools\Package;
+use Helix\Lego\Apps\Services\IncludeFrontendViews;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
 class GtmServiceProvider extends PackageServiceProvider
@@ -18,7 +19,11 @@ class GtmServiceProvider extends PackageServiceProvider
             ->migrations([
                 __DIR__ . '/../database/migrations',
                 __DIR__ . '/../database/migrations/settings',
-            ]);
+            ])->includeFrontendViews(function (IncludeFrontendViews $views) {
+                return $views
+                    ->addToHead(['gtm::header-script'])
+                    ->addToEnd(['gtm::body-script']);
+            });
     }
 
     public function bootingPackage()

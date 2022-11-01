@@ -98,6 +98,37 @@ class GoogleTagManager
         $this->pushDataLayer->push($pushItem);
     }
 
+    public function pushOnce(array $search, array|string $key, mixed $value = null, bool $overwrite = true) : void
+    {
+        // We check if the search array has already been added to the pushDataLayer.
+        // This will return either an interger index or false if it was not found
+        // which we later will use to determine what happens to our key/value.
+        $indexExists = $this->pushDataLayer->search(function ($value) use ($search, $key) {
+            return ! empty(array_intersect_assoc($search, $value->toArray()));
+        });
+
+        // The search was not already added so we add it now and call it a day.
+        if ($indexExists === false) {
+            $this->push($key, $value);
+
+            return;
+        }
+
+        // It was found but we want to keep the first one, so just move on.
+        if ($overwrite === false) {
+            return;
+        }
+
+        // We remove the already set key/value from the pushDataLayer.
+        unset($this->pushDataLayer[$indexExists]);
+
+        // And the add the new one.
+        $this->push($key, $value);
+
+        // Lastly, we reset the keys in the pushDataLayer.
+        $this->pushDataLayer = $this->pushDataLayer->values();
+    }
+
     /**
      * Retrieve the data layer's data for the next request.
      */

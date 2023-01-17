@@ -35,10 +35,8 @@ class GtmSettings extends AppSettings
 
     public function labels(): array
     {
-
         return [
-            'server_side_url' => 'Server side URL'
+            'server_side_url' => 'Server side URL',
         ];
-
     }
 }

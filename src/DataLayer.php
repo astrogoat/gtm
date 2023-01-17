@@ -30,7 +30,7 @@ class DataLayer
         Arr::set($this->data, $key, $value);
     }
 
-    public function has(string $key) : bool
+    public function has(string $key): bool
     {
         return Arr::has($this->data, $key);
     }

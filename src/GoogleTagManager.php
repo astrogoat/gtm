@@ -98,7 +98,7 @@ class GoogleTagManager
         $this->pushDataLayer->push($pushItem);
     }
 
-    public function pushOnce(array|string $search, array|string $value = null, bool $overwrite = true) : void
+    public function pushOnce(array|string $search, array|string $value = null, bool $overwrite = true): void
     {
         // We check if the search array has already been added to the pushDataLayer.
         // This will return either an interger index or false if it was not found

@@ -6,18 +6,21 @@
 
         if(blank($server_side_url)){
 
-            $server_side_url = 'www.googletagmanager.com';
+            $server_side_url = 'https://www.googletagmanager.com';
 
         }else{
 
-            $server_side_url = Str::of($server_side_url,'https://')
-                                ->replaceFirst(url('https://'), '');
+            if(! Str::startsWith($server_side_url,'https://')){
+                $server_side_url = Str::start($server_side_url,'https://');
+
+            }
+
         }
 
     @endphp
 
     <!-- [GTM] Body | Start -->
-    <noscript><iframe src="https://{{ $server_side_url }}/ns.html?id={{ settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'container_id') }}"
+    <noscript><iframe src="{{ $server_side_url }}/ns.html?id={{ settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'container_id') }}"
                       height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- [GTM] End | Start -->
 @endif

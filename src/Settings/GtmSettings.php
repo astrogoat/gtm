@@ -39,4 +39,11 @@ class GtmSettings extends AppSettings
             'server_side_url' => 'Server side URL',
         ];
     }
+
+    public function help(): array
+    {
+        return [
+            'server_side_url' => '(Optional) Uses GTM default URL if left blank.'
+        ];
+    }
 }

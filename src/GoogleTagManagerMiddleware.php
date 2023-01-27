@@ -2,6 +2,7 @@
 
 namespace Astrogoat\Gtm;
 
+use Astrogoat\Gtm\Settings\GtmSettings;
 use Closure;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Session\Store as Session;
@@ -31,6 +32,10 @@ class GoogleTagManagerMiddleware
      */
     public function handle($request, Closure $next)
     {
+        if (! GtmSettings::isEnabled()) {
+            return $next($request);
+        }
+
         if ($this->session->has($this->sessionKey) && ! blank($this->session->get($this->sessionKey))) {
             $this->googleTagManager->push($this->session->get($this->sessionKey));
         }

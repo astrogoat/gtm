@@ -15,7 +15,9 @@
         @foreach($pushData as $item)
             window.dataLayer.push({!! $item->toJson() !!});
         @endforeach
-
+       @if(Astrogoat\Elevar\Settings\ElevarSettings::class::isEnabled())
+            window.addEventListener('push_to_data_layer', (event) => window.ElevarPushToDataLayer(event.detail))
+        @endif
         window.addEventListener('push_to_data_layer', (event) => window.dataLayer.push(event.detail))
     </script>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

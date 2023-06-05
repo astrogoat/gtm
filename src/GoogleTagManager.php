@@ -93,6 +93,12 @@ class GoogleTagManager
      */
     public function push(array|string $key, mixed $value = null)
     {
+        ray([
+            "Event " =>[
+                "Key" => $key,
+                "Value" => $value
+            ]
+        ]);
         $pushItem = new DataLayer();
         $pushItem->set($key, $value);
         $this->pushDataLayer->push($pushItem);

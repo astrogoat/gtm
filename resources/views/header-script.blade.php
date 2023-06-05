@@ -9,14 +9,23 @@
         window.dataLayer = window.dataLayer || [];
 
         @unless(empty($dataLayer->toArray()))
+         @php
+            ray([ "Data Layer Array" =>  $dataLayer->toArray()])
+         @endphp
             window.dataLayer.push({!! $dataLayer->toJson() !!});
         @endunless
 
         @if(Astrogoat\Elevar\Settings\ElevarSettings::class::isEnabled())
+        @php
+            ray([ "push_to_data_layer" =>  "pushed"])
+        @endphp
             window.addEventListener('push_to_data_layer', (event) => window.ElevarPushToDataLayer(event.detail))
         @endif
 
         @foreach($pushData as $item)
+        @php
+            ray([ "Data Layer Item" =>  $item->toJson()])
+        @endphp
             window.dataLayer.push({!! $item->toJson() !!});
         @endforeach
 

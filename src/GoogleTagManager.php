@@ -106,6 +106,13 @@ class GoogleTagManager
 
     public function pushOnce(array|string $search, array|string $value = null, bool $overwrite = false): void
     {
+        ray([
+            "Event Pushed Once" => [
+                "search" => $search,
+                "Value" => $value,
+            ],
+        ]);
+
         // We check if the search array has already been added to the pushDataLayer.
         // This will return either an interger index or false if it was not found
         // which we later will use to determine what happens to our key/value.

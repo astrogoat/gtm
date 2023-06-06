@@ -15,19 +15,20 @@
             window.dataLayer.push({!! $dataLayer->toJson() !!});
         @endunless
 
+        @php
+            ray([ "Data Layer Items" =>  $pushData])
+        @endphp
+
+        @foreach($pushData as $item)
+            window.dataLayer.push({!! $item->toJson() !!});
+        @endforeach
+
         @if(Astrogoat\Elevar\Settings\ElevarSettings::class::isEnabled())
         @php
             ray([ "push_to_data_layer" =>  "pushed"])
         @endphp
-            window.addEventListener('push_to_data_layer', (event) => window.ElevarPushToDataLayer(event.detail))
+        window.addEventListener('push_to_data_layer', (event) => window.ElevarPushToDataLayer(event.detail))
         @endif
-
-        @foreach($pushData as $item)
-        @php
-            ray([ "Data Layer Item" =>  $item->toJson()])
-        @endphp
-            window.dataLayer.push({!! $item->toJson() !!});
-        @endforeach
 
     </script>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

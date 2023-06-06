@@ -9,15 +9,8 @@
         window.dataLayer = window.dataLayer || [];
 
         @unless(empty($dataLayer->toArray()))
-         @php
-            ray([ "Data Layer Array" =>  $dataLayer->toArray()])
-         @endphp
             window.dataLayer.push({!! $dataLayer->toJson() !!});
         @endunless
-
-        @php
-            ray([ "Data Layer Items" =>  $pushData])
-        @endphp
 
         @foreach($pushData as $item)
             window.dataLayer.push({!! $item->toJson() !!});

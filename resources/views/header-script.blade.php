@@ -16,7 +16,7 @@
             window.dataLayer.push({!! $item->toJson() !!});
         @endforeach
 
-        @if(settings (\Astrogoat\Elevar\ElevarSettings::class)-›isEnabled())
+        @if(settings (\Astrogoat\Elevar\ElevarSettings::class)->isEnabled())
             window.addEventListener('push_to_data_layer', (event) => window.ElevarPushToDataLayer(event.detail))
         @else
             window.addEventListener('push_to_data_layer', (event) => window.dataLayer.push(event.detail))

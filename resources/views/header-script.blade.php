@@ -1,24 +1,32 @@
 @if(\Astrogoat\Gtm\Settings\GtmSettings::isEnabled())
     @php
-      $serverSideUrl = blank(settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'server_side_url'))
-            ? 'https://www.googletagmanager.com'
-            : settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'server_side_url');
+        $serverSideUrl = blank(settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'server_side_url'))
+              ? 'https://www.googletagmanager.com'
+              : settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'server_side_url');
     @endphp
     <!-- [GTM] Header | Start -->
     <script>
         window.dataLayer = window.dataLayer || [];
 
-        @unless(empty($dataLayer->toArray()))
-            window.dataLayer.push({!! $dataLayer->toJson() !!});
-        @endunless
-
-        @foreach($pushData as $item)
-            window.dataLayer.push({!! $item->toJson() !!});
-        @endforeach
-
         @if(settings(\Astrogoat\Elevar\Settings\ElevarSettings::class)->isEnabled())
+            @unless(empty($dataLayer->toArray()))
+                window.ElevarPushToDataLayer({!! $dataLayer->toJson() !!});
+            @endunless
+
+            @foreach($pushData as $item)
+                window.ElevarPushToDataLayer({!! $item->toJson() !!});
+            @endforeach
+
             window.addEventListener('push_to_data_layer', (event) => window.ElevarPushToDataLayer(event.detail))
         @else
+            @unless(empty($dataLayer->toArray()))
+                window.dataLayer.push({!! $dataLayer->toJson() !!});
+            @endunless
+
+            @foreach($pushData as $item)
+                window.dataLayer.push({!! $item->toJson() !!});
+            @endforeach
+
             window.addEventListener('push_to_data_layer', (event) => window.dataLayer.push(event.detail))
         @endif
     </script>

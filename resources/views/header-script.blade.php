@@ -8,7 +8,9 @@
     <script>
         window.dataLayer = window.dataLayer || [];
 
-        @if(settings(\Astrogoat\Elevar\Settings\ElevarSettings::class)->isEnabled())
+        @php($settings = settings(Astrogoat\Elevar\Settings\ElevarSettings::class))
+
+        @if($settings->isEnabled() && $settings->data_layer_listener_enabled)
             @unless(empty($dataLayer->toArray()))
                 window.ElevarPushToDataLayer({!! $dataLayer->toJson() !!});
             @endunless

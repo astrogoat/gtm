@@ -26,7 +26,7 @@ class GoogleTagManager
         $this->dataLayer = new DataLayer();
         $this->flashDataLayer = new DataLayer();
         $this->pushDataLayer = new Collection();
-        $this->enabled = GtmSettings::isEnabled() && ! blank($this->id);
+        $this->enabled = tenancy()->initialized ? GtmSettings::isEnabled() && ! blank($this->id) : false;
     }
 
     /**

@@ -7,8 +7,10 @@ use Helix\Lego\Apps\App;
 use Helix\Lego\Apps\Services\IncludeFrontendViews;
 use Helix\Lego\LegoManager;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Event;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Stancl\Tenancy\Events\TenancyBootstrapped;
 
 class GtmServiceProvider extends PackageServiceProvider
 {
@@ -44,11 +46,13 @@ class GtmServiceProvider extends PackageServiceProvider
             $lego->registerApp(fn (App $app) => $this->registerApp($app));
         });
 
-        $this->app->singleton(GoogleTagManager::class, function () {
-            return new GoogleTagManager(settings(GtmSettings::class, 'container_id'));
-        });
+        Event::listen(TenancyBootstrapped::class, function () {
+            $this->app->singleton(GoogleTagManager::class, function () {
+                return new GoogleTagManager(settings(GtmSettings::class, 'container_id'));
+            });
 
-        $this->app->alias(GoogleTagManager::class, 'googletagmanager');
+            $this->app->alias(GoogleTagManager::class, 'googletagmanager');
+        });
     }
 
     public function configurePackage(Package $package): void

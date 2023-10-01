@@ -32,7 +32,7 @@ class GoogleTagManagerMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (! GtmSettings::isEnabled()) {
+        if (! tenancy()->initialized || ! GtmSettings::isEnabled()) {
             return $next($request);
         }
 

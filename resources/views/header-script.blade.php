@@ -4,22 +4,24 @@
               ? 'https://www.googletagmanager.com'
               : settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'server_side_url');
     @endphp
-    <!-- [GTM] Header | Start -->
+    <!-- -- [GTM] Header | Start -->
     <script>
         window.dataLayer = window.dataLayer || [];
 
-        @php($settings = settings(Astrogoat\Elevar\Settings\ElevarSettings::class))
+        @php($elevarSettings = settings(Astrogoat\Elevar\Settings\ElevarSettings::class))
 
-        @if($settings->isEnabled() && $settings->data_layer_listener_enabled)
+        @if($elevarSettings->isEnabled())
+            window.ElevarDataLayer = window.ElevarDataLayer ?? [];
+
             @unless(empty($dataLayer->toArray()))
-                window.ElevarPushToDataLayer({!! $dataLayer->toJson() !!});
+                window.ElevarDataLayer.push({!! $dataLayer->toJson() !!});
             @endunless
 
             @foreach($pushData as $item)
-                window.ElevarPushToDataLayer({!! $item->toJson() !!});
+                window.ElevarDataLayer.push({!! $item->toJson() !!});
             @endforeach
 
-            window.addEventListener('push_to_data_layer', (event) => window.ElevarPushToDataLayer(event.detail))
+            window.addEventListener('push_to_data_layer', (event) => window.ElevarDataLayer.push(event.detail))
         @else
             @unless(empty($dataLayer->toArray()))
                 window.dataLayer.push({!! $dataLayer->toJson() !!});
@@ -38,5 +40,5 @@
             '{{ $serverSideUrl }}/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','{{ settings(Astrogoat\Gtm\Settings\GtmSettings::class, 'container_id') }}');
     </script>
-    <!-- [GTM] Header | End -->
+    <!-- -- [GTM] Header | End -->
 @endif

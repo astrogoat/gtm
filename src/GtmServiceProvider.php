@@ -6,6 +6,7 @@ use Astrogoat\Gtm\Settings\GtmSettings;
 use Helix\Lego\Apps\App;
 use Helix\Lego\Apps\Services\IncludeFrontendViews;
 use Helix\Lego\LegoManager;
+use Helix\Lego\Providers\RouteServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Event;
 use Spatie\LaravelPackageTools\Package;
@@ -31,13 +32,12 @@ class GtmServiceProvider extends PackageServiceProvider
 
     public function bootingPackage()
     {
-        $this->app['view']->creator(
-            ['gtm::header-script', 'gtm::body-script'],
-            ScriptViewCreator::class
-        );
+        $this->app['view']->creator([
+            'gtm::header-script',
+            'gtm::body-script'
+        ], ScriptViewCreator::class);
 
-        $router = resolve(Router::class);
-        $router->pushMiddlewareToGroup('frontend', GoogleTagManagerMiddleware::class);
+        resolve(Router::class)->pushMiddlewareToGroup(RouteServiceProvider::MIDDLEWARE_GROUP_FRONTEND, GoogleTagManagerMiddleware::class);
     }
 
     public function registeringPackage()

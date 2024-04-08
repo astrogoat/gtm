@@ -34,7 +34,7 @@ class GtmServiceProvider extends PackageServiceProvider
     {
         $this->app['view']->creator([
             'gtm::header-script',
-            'gtm::body-script'
+            'gtm::body-script',
         ], ScriptViewCreator::class);
 
         resolve(Router::class)->pushMiddlewareToGroup(RouteServiceProvider::MIDDLEWARE_GROUP_FRONTEND, GoogleTagManagerMiddleware::class);

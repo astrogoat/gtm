@@ -21,7 +21,7 @@
                 window.ElevarDataLayer.push({!! $item->toJson() !!});
             @endforeach
 
-            window.addEventListener('push_to_data_layer', (event) => window.ElevarDataLayer.push(event.detail))
+            window.addEventListener('push-to-data-layer', (event) => window.ElevarDataLayer.push(event.detail))
         @else
             @unless(empty($dataLayer->toArray()))
                 window.dataLayer.push({!! $dataLayer->toJson() !!});
@@ -31,7 +31,7 @@
                 window.dataLayer.push({!! $item->toJson() !!});
             @endforeach
 
-            window.addEventListener('push_to_data_layer', (event) => window.dataLayer.push(event.detail))
+            window.addEventListener('push-to-data-layer', (event) => window.dataLayer.push(event.detail))
         @endif
     </script>
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

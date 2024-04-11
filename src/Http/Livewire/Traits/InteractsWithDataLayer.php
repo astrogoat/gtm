@@ -12,6 +12,6 @@ trait InteractsWithDataLayer
             return;
         }
 
-        $this->dispatchBrowserEvent('push_to_data_layer', $data);
+        $this->dispatchBrowserEvent('push-to-data-layer', $data);
     }
 }
